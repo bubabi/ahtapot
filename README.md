@@ -15,6 +15,10 @@
 [![Rust](https://img.shields.io/badge/Rust-backend-ff7a45?logo=rust&logoColor=white&style=flat-square)](https://www.rust-lang.org)
 [![React](https://img.shields.io/badge/React-19-21bc70?logo=react&logoColor=white&style=flat-square)](https://react.dev)
 
+<br />
+
+<img src="branding/hero.png" alt="Ahtapot showing the oh-my-pi commit graph and commit details, with the frame tint letting the desktop show through the toolbar, rail and sidebar" />
+
 </div>
 
 ---
@@ -64,6 +68,11 @@ interface calls the backend over Tauri's IPC. The app bundle is 7.5 MiB.
   AI and GitHub requests
 - React 19, TypeScript, Vite and Zustand, with xterm.js for the terminal and Prism for syntax
   highlighting
+
+## Credits
+
+The interface is modeled on a git client prototype that [Can Bölük](https://x.com/_can1357) shared
+[on X](https://x.com/_can1357/status/2104776336212377950).
 
 ## License
 
