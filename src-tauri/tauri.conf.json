@@ -1,0 +1,72 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "Ahtapot",
+  "version": "0.1.0",
+  "identifier": "io.github.bubabi.ahtapot",
+  "build": {
+    "beforeDevCommand": "bun run dev",
+    "devUrl": "http://localhost:1420",
+    "beforeBuildCommand": "bun run build",
+    "frontendDist": "../dist"
+  },
+  "app": {
+    "windows": [
+      {
+        "title": "Ahtapot",
+        "width": 1660,
+        "height": 940,
+        "minWidth": 960,
+        "minHeight": 560,
+        "transparent": true,
+        "titleBarStyle": "Overlay",
+        "hiddenTitle": true,
+        "trafficLightPosition": {
+          "x": 17,
+          "y": 29
+        },
+        "windowEffects": {
+          "effects": [
+            "hudWindow"
+          ],
+          "state": "active"
+        },
+        "dragDropEnabled": true,
+        "theme": "Dark"
+      }
+    ],
+    "security": {
+      "csp": {
+        "default-src": "'self' ipc: http://ipc.localhost",
+        "img-src": "'self' data: blob: https:",
+        "style-src": "'self' 'unsafe-inline'",
+        "font-src": "'self' data:",
+        "connect-src": "'self' ipc: http://ipc.localhost"
+      },
+      "devCsp": null
+    },
+    "macOSPrivateApi": true
+  },
+  "bundle": {
+    "active": true,
+    "targets": "all",
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico",
+      "icons/Assets.car"
+    ],
+    "category": "DeveloperTool",
+    "shortDescription": "A git client",
+    "copyright": "\u00a9 2026 Burak Emre Özer"
+  },
+  "plugins": {
+    "updater": {
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDQzMkFDQzBFMURGQzMxQTAKUldTZ01md2REc3dxUTVqd21qR2xtSjBiaVdUUnloOEZqM1YwK2hFZEZ3dzQ1cWlCWkpXZXFHK2YK",
+      "endpoints": [
+        "https://github.com/bubabi/ahtapot/releases/latest/download/latest.json"
+      ]
+    }
+  }
+}
