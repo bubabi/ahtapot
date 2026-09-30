@@ -211,8 +211,8 @@ function ImageDiff({ target, type }: { target: DiffTarget; type: string }) {
     <div className="diff-view" onKeyDown={(e) => e.key === "Escape" && close()} tabIndex={-1}>
       <DiffHead target={target} />
       <div className="img-diff">
-        <ImagePane key={left?.url ?? String(left)} label="Before" image={left} tone="del" />
-        <ImagePane key={right?.url ?? String(right)} label="After" image={right} tone="add" />
+        <ImagePane key={`before:${left?.url ?? left}`} label="Before" image={left} tone="del" />
+        <ImagePane key={`after:${right?.url ?? right}`} label="After" image={right} tone="add" />
       </div>
     </div>
   );

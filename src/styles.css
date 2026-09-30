@@ -190,12 +190,6 @@ kbd {
 .tb-group {
   display: flex;
   gap: 2px;
-  margin-left: 16px;
-}
-.tb-btn.with-count {
-  padding-right: 2px;
-}
-.tb-group + .tb-group + .tb-group {
   margin-left: 13px;
 }
 .logo {
@@ -208,16 +202,13 @@ kbd {
   align-items: center;
   gap: 6px;
   height: 28px;
-  padding: 0 4px;
+  padding: 0 5px;
   border: 0;
   border-radius: 7px;
   background: none;
   font-size: 14px;
   color: #c9cdd5;
   white-space: nowrap;
-}
-.crumb.repo {
-  padding: 0 5px;
 }
 .crumb:hover {
   background: rgba(255, 255, 255, 0.05);
@@ -229,8 +220,6 @@ kbd {
 }
 .crumb.branch {
   color: var(--text-3);
-  gap: 6px;
-  padding: 0 3px 0 2px;
 }
 .crumb-name,
 .crumb.repo .crumb-strong {
@@ -262,10 +251,6 @@ kbd {
 .crumb-icon {
   color: var(--text-2);
   flex: none;
-}
-.crumb.commit {
-  gap: 6px;
-  padding-left: 3px;
 }
 .crumb.commit:hover {
   background: none;
@@ -304,6 +289,7 @@ kbd {
   display: flex;
   align-items: center;
   gap: 7px;
+  margin-right: 7px;
   padding: 0 7px 0 9px;
   border: 1px solid var(--line-2);
   border-radius: 9px;
@@ -331,9 +317,6 @@ kbd {
 }
 .search kbd + kbd {
   margin-left: -2px;
-}
-.search + .popover-anchor {
-  margin-left: 7px;
 }
 .popover-anchor + .tb-btn {
   margin-left: 1px;
@@ -473,7 +456,7 @@ kbd {
 }
 .rail-sep {
   width: 24px;
-  margin: -2px 0 -4px 4px;
+  margin: -3px 0 -3px 4px;
   height: 1px;
   background: var(--line-2);
 }
@@ -497,6 +480,7 @@ kbd {
 .rail-add {
   width: 32px;
   height: 32px;
+  padding: 0;
   display: grid;
   place-items: center;
   border-radius: 9px;
@@ -632,7 +616,7 @@ kbd {
 .foot-line {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 9px;
   font-size: 13px;
 }
 .foot-line .label {
@@ -656,7 +640,7 @@ kbd {
   display: flex;
   gap: 8px;
   margin-top: 1px;
-  padding-left: 21px;
+  padding-left: 22px;
   color: var(--text-3);
   font-size: 12px;
   white-space: nowrap;
@@ -666,10 +650,6 @@ kbd {
   min-width: 0;
   overflow: hidden;
   text-overflow: ellipsis;
-}
-
-.foot-sub svg {
-  vertical-align: -1px;
 }
 
 /* Graph */
@@ -701,9 +681,13 @@ kbd {
   box-sizing: border-box;
   white-space: nowrap;
 }
+.hcell:first-child {
+  padding-left: 6px;
+}
 .hcell.grow {
   flex: 1;
   min-width: 120px;
+  padding-left: 8px;
 }
 .resizer {
   position: absolute;
@@ -978,6 +962,9 @@ kbd {
 .detail-head .close {
   margin-left: 6px;
 }
+.detail-head .seg {
+  margin-right: 8px;
+}
 .detail-head .title {
   font-weight: 500;
 }
@@ -991,6 +978,7 @@ kbd {
 .icon-btn {
   width: 26px;
   height: 26px;
+  padding: 0;
   flex: none;
   display: grid;
   place-items: center;
@@ -1119,6 +1107,7 @@ h2.subject {
 .kv {
   display: grid;
   grid-template-columns: max-content 1fr auto;
+  grid-auto-rows: minmax(22px, auto);
   column-gap: 23px;
   row-gap: 10px;
   align-items: center;
@@ -1256,7 +1245,7 @@ h2.subject {
   display: inline-flex;
   flex: none;
   gap: 2px;
-  padding: 1.5px;
+  padding: 1px;
   border: 1px solid var(--line);
   border-radius: 8px;
   background: rgba(0, 0, 0, 0.2);
@@ -1377,7 +1366,7 @@ h2.subject {
 /* Staging */
 
 .banner {
-  margin: 12px 12px 0;
+  margin: 12px 16px 0;
   padding: 10px 12px;
   display: grid;
   gap: 10px;
@@ -1405,7 +1394,7 @@ h2.subject {
   display: flex;
   align-items: center;
   gap: 6px;
-  padding: 14px 14px 6px 16px;
+  padding: 14px 16px 6px;
   font-size: 12.5px;
   font-weight: 600;
   color: var(--text-2);
@@ -1419,7 +1408,7 @@ h2.subject {
   flex: none;
   display: grid;
   gap: 8px;
-  padding: 12px 14px 14px;
+  padding: 12px 16px 14px;
   border-top: 1px solid var(--line);
 }
 .field {
@@ -1438,6 +1427,15 @@ h2.subject {
 }
 .field:focus {
   border-color: color-mix(in srgb, var(--accent) 60%, transparent);
+}
+/* WebKit draws a native fixed-height popup button unless appearance is none. */
+select.field {
+  -webkit-appearance: none;
+  appearance: none;
+  line-height: inherit;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 256 256' fill='none' stroke='%23a3a4a8' stroke-width='24' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M208 96l-80 80-80-80'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 9px center;
 }
 .summary-field {
   position: relative;
@@ -1770,7 +1768,8 @@ textarea.description {
 
 /* Terminal */
 
-.terminal {
+/* xterm puts class "terminal" on its own root element. */
+.term-pane {
   position: relative;
   flex: none;
   display: flex;
@@ -2171,7 +2170,7 @@ textarea.description {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 14px 0 24px;
+  padding: 0 16px 0 24px;
   border-bottom: 1px solid var(--line);
 }
 .st-head h2 {
@@ -2210,6 +2209,7 @@ textarea.description {
   align-items: center;
   justify-content: flex-end;
   max-width: 55%;
+  text-align: right;
   color: var(--text-2);
   -webkit-user-select: text;
   user-select: text;
@@ -2222,6 +2222,10 @@ textarea.description {
 .st-control select.field {
   width: auto;
   min-width: 220px;
+}
+.st-control select.field,
+.ai-settings .set-row select.field {
+  padding-right: 26px;
 }
 .st-group {
   margin: 18px 0 2px;
@@ -2374,7 +2378,6 @@ textarea.description {
   padding: 5px 9px;
   font-size: 12.5px;
 }
-.ai-settings .dim.small,
 .ai-settings .key-error {
   padding-top: 8px;
 }

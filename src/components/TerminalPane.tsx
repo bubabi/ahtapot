@@ -174,7 +174,7 @@ export function TerminalPane() {
   const title = env ? `${env.user}@${env.host}:${tildify(active, env.home)}` : active;
 
   return (
-    <div className={`terminal${collapsed ? " collapsed" : ""}`} style={{ height: collapsed ? undefined : height }}>
+    <div className={`term-pane${collapsed ? " collapsed" : ""}`} style={{ height: collapsed ? undefined : height }}>
       {!collapsed && <div className="term-drag" onPointerDown={drag} />}
       <div className="term-head">
         <TerminalWindow size={14} className="icon" />
