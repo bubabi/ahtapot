@@ -7,6 +7,13 @@ export type Accent = "blue" | "purple" | "green" | "orange" | "pink";
 export const APP_ICONS = ["dark", "light", "brand", "glass", "mono", "tinted", "depth", "glow"] as const;
 export type AppIcon = (typeof APP_ICONS)[number];
 
+/** An empty `value` or `color` means the default derived from the repository name. */
+export interface ProjectTile {
+  kind: "letters" | "emoji" | "icon";
+  value: string;
+  color: string;
+}
+
 export interface Settings {
   restoreLastRepo: boolean;
   autoFetchMinutes: number;
@@ -38,6 +45,7 @@ export interface Settings {
   editor: string;
   ai: AiSettings;
   loadouts: Record<string, Partial<Loadout>>;
+  tiles: Record<string, ProjectTile>;
 }
 
 export const DEFAULTS: Settings = {
@@ -71,6 +79,7 @@ export const DEFAULTS: Settings = {
   editor: "",
   ai: DEFAULT_AI,
   loadouts: {},
+  tiles: {},
 };
 
 /** Display settings a loadout captures. Git behavior, the editor, shell and AI provider stay out. */
@@ -118,7 +127,7 @@ export const sameLoadout = (a: Loadout, b: Loadout) => LOADOUT_KEYS.every((k) =>
 export function normalize(raw: unknown): Settings {
   if (!raw || typeof raw !== "object") return DEFAULTS;
   const stored = raw as Partial<Settings>;
-  return { ...DEFAULTS, ...stored, ai: { ...DEFAULT_AI, ...stored.ai }, loadouts: { ...stored.loadouts } };
+  return { ...DEFAULTS, ...stored, ai: { ...DEFAULT_AI, ...stored.ai }, loadouts: { ...stored.loadouts }, tiles: { ...stored.tiles } };
 }
 
 export function cachedSettings(): Settings {

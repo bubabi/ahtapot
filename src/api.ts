@@ -116,6 +116,7 @@ export const api = {
   reposLoad: () => invoke<RepoList>("repos_load"),
   githubAvatar: (repo: string, email: string) => invoke<string | null>("github_avatar", { repo, email }),
   setAppIcon: (style: string) => invoke<void>("set_app_icon", { style }),
+  showEmojiPicker: () => invoke<void>("show_emoji_picker"),
   reposSave: (list: RepoList) => invoke<void>("repos_save", { list }),
   settingsLoad: () => invoke<unknown>("settings_load"),
   settingsSave: (settings: unknown) => invoke<void>("settings_save", { settings }),

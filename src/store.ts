@@ -1,5 +1,6 @@
 import { listen } from "@tauri-apps/api/event";
 import { open as openDialog } from "@tauri-apps/plugin-dialog";
+import type { ReactNode } from "react";
 import { create } from "zustand";
 import { api, Commit, CommitDetail, DiffOpts, EnvInfo, FileChange, PullMode, ResetMode, SequenceAction, Snapshot } from "./api";
 import { closeTerminal } from "./components/TerminalPane";
@@ -21,6 +22,8 @@ export interface Note {
 
 export interface MenuItem {
   label: string;
+  icon?: ReactNode;
+  checked?: boolean;
   run?: () => void;
   danger?: boolean;
   disabled?: boolean;
@@ -65,6 +68,7 @@ interface State {
   autoHidden: { sidebar: boolean; detail: boolean };
   paletteOpen: boolean;
   settingsOpen: boolean;
+  projectEdit: string | null;
   busy: string | null;
   notes: Note[];
   toasts: Note[];
@@ -112,6 +116,7 @@ export const useStore = create<State>(() => ({
   autoHidden: { sidebar: false, detail: false },
   paletteOpen: false,
   settingsOpen: false,
+  projectEdit: null,
   busy: null,
   notes: [],
   toasts: [],
@@ -555,6 +560,7 @@ export const actions = {
   openPalette: () => set({ paletteOpen: true }),
   togglePalette: () => set((s) => ({ paletteOpen: !s.paletteOpen })),
   openSettings: () => set({ settingsOpen: true, paletteOpen: false }),
+  editProject: (path: string) => set({ projectEdit: path }),
   toggleSettings: () => set((s) => ({ settingsOpen: !s.settingsOpen, paletteOpen: false })),
   zoom: (step: number) => {
     const zoom = step === 0 ? 1 : Math.round(Math.min(1.5, Math.max(0.75, get().settings.zoom + step)) * 100) / 100;

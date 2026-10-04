@@ -3,22 +3,14 @@ import { MouseEvent, ReactNode, RefObject, useEffect, useLayoutEffect, useRef, u
 import { useShallow } from "zustand/react/shallow";
 import { WIP } from "../graph";
 import { actions, jumpTo, MenuItem, openRepo, pickRepo, refresh, removeRepo, toggleMenu, useStore } from "../store";
-import { basename, hashColor, relativeTime } from "../util";
+import { basename, relativeTime } from "../util";
+import { RepoTile } from "./ProjectTile";
 
 function Btn({ title, onClick, disabled, on, children, className }: { title: string; onClick: (e: MouseEvent) => void; disabled?: boolean; on?: boolean; children: ReactNode; className?: string }) {
   return (
     <button className={`tb-btn${on ? " on" : ""}${className ? " " + className : ""}`} title={title} disabled={disabled} onClick={onClick}>
       {children}
     </button>
-  );
-}
-
-export function RepoTile({ path, size = 18 }: { path: string; size?: number }) {
-  const name = basename(path);
-  return (
-    <span className="repo-tile" style={{ width: size, height: size, background: hashColor(name), fontSize: size * 0.42 }}>
-      {name.slice(0, 2).toUpperCase()}
-    </span>
   );
 }
 
@@ -108,7 +100,7 @@ export function TopBar() {
 
   const repoMenu = (e: MouseEvent) => {
     toggleMenu(e.currentTarget, [
-      ...repos.map((r) => ({ label: `${r === active ? "✓ " : "   "}${basename(r)}`, run: () => openRepo(r) })),
+      ...repos.map((r) => ({ label: basename(r), icon: <RepoTile path={r} />, checked: r === active, run: () => openRepo(r) })),
       { separator: true, label: "" },
       { label: "Open repository…", run: pickRepo },
       ...(active ? [{ label: `Remove ${basename(active)} from list`, run: () => removeRepo(active), danger: true }] : []),

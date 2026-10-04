@@ -1,4 +1,4 @@
-import { CheckCircle, Info, WarningCircle } from "@phosphor-icons/react";
+import { Check, CheckCircle, Info, WarningCircle } from "@phosphor-icons/react";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useStore } from "../store";
 
@@ -49,7 +49,9 @@ export function ContextMenu() {
               item.run?.();
             }}
           >
+            {item.icon}
             {item.label}
+            {item.checked && <Check size={13} weight="bold" className="menu-check" />}
           </button>
         ),
       )}

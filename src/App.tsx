@@ -8,11 +8,12 @@ import { DiffView } from "./components/DiffView";
 import { GraphTable } from "./components/GraphTable";
 import { ContextMenu, DialogHost, Toasts } from "./components/Overlays";
 import { Palette } from "./components/Palette";
+import { ProjectEditor, RepoTile } from "./components/ProjectTile";
 import { RepoRail } from "./components/RepoRail";
 import { SettingsDialog } from "./components/Settings";
 import { Sidebar } from "./components/Sidebar";
 import { TerminalPane } from "./components/TerminalPane";
-import { RepoTile, TopBar } from "./components/TopBar";
+import { TopBar } from "./components/TopBar";
 import { api } from "./api";
 import { applyAppearance } from "./settings";
 import { actions, addRepo, clampDetailWidth, DETAIL_WIDTH, handleMenu, init, notify, openRepo, pickRepo, saveDetailWidth, useStore } from "./store";
@@ -26,7 +27,8 @@ function isTyping(e: KeyboardEvent) {
 function useShortcuts() {
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      if (isTyping(e) || useStore.getState().dialog || useStore.getState().settingsOpen) return;
+      const { dialog, settingsOpen, projectEdit } = useStore.getState();
+      if (isTyping(e) || dialog || settingsOpen || projectEdit) return;
       if (e.key === "Escape" && !e.metaKey) useStore.setState({ diff: null });
       if (e.metaKey && e.key.toLowerCase() === "z") {
         e.preventDefault();
@@ -200,6 +202,7 @@ export default function App() {
       </div>
       <Palette />
       <SettingsDialog />
+      <ProjectEditor />
       <ContextMenu />
       <DialogHost />
       <Toasts />

@@ -1,8 +1,8 @@
 import { Plus } from "@phosphor-icons/react";
 import { useShallow } from "zustand/react/shallow";
-import { openMenu, openRepo, pickRepo, removeRepo, useStore } from "../store";
+import { actions, openMenu, openRepo, pickRepo, removeRepo, useStore } from "../store";
 import { basename } from "../util";
-import { RepoTile } from "./TopBar";
+import { RepoTile } from "./ProjectTile";
 
 export function RepoRail() {
   const { repos, active, badges } = useStore(useShallow((s) => ({ repos: s.repos, active: s.active, badges: s.badges })));
@@ -18,7 +18,11 @@ export function RepoRail() {
             onClick={() => r !== active && openRepo(r)}
             onContextMenu={(e) => {
               e.preventDefault();
-              openMenu(e.clientX, e.clientY, [{ label: `Remove ${basename(r)} from list`, run: () => removeRepo(r), danger: true }]);
+              openMenu(e.clientX, e.clientY, [
+                { label: `Edit ${basename(r)} project…`, run: () => actions.editProject(r) },
+                { separator: true, label: "" },
+                { label: `Remove ${basename(r)} from list`, run: () => removeRepo(r), danger: true },
+              ]);
             }}
           >
             <RepoTile path={r} size={32} />

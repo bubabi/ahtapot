@@ -431,6 +431,20 @@ fn set_app_icon(app: AppHandle, style: String) -> Res<()> {
 }
 
 #[tauri::command]
+fn show_emoji_picker(app: AppHandle) -> Res<()> {
+    #[cfg(target_os = "macos")]
+    app.run_on_main_thread(|| {
+        if let Some(mtm) = objc2::MainThreadMarker::new() {
+            objc2_app_kit::NSApplication::sharedApplication(mtm).orderFrontCharacterPalette(None);
+        }
+    })
+    .map_err(|e| e.to_string())?;
+    #[cfg(not(target_os = "macos"))]
+    let _ = app;
+    Ok(())
+}
+
+#[tauri::command]
 async fn github_avatar(repo: String, email: String) -> Res<Option<String>> {
     blocking(move || Ok(github::avatar(Path::new(&repo), &email))).await
 }
@@ -680,6 +694,7 @@ pub fn run() {
             ai_models,
             github_avatar,
             set_app_icon,
+            show_emoji_picker,
             ai_key_source,
             ai_key_set,
             ai_key_clear,

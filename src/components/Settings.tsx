@@ -241,11 +241,12 @@ function Loadouts({ s }: { s: Settings }) {
 async function resetAll() {
   const ok = await confirmDialog(
     "Reset settings",
-    "Restore every setting to its default? Saved loadouts and AI keys in the Keychain stay.",
+    "Restore every setting to its default? Saved loadouts, project tiles and AI keys in the Keychain stay.",
     "Reset",
     true,
   );
-  if (ok) updateSettings({ ...DEFAULTS, loadouts: useStore.getState().settings.loadouts });
+  const { loadouts, tiles } = useStore.getState().settings;
+  if (ok) updateSettings({ ...DEFAULTS, loadouts, tiles });
 }
 
 function Body({ section, s }: { section: Section; s: Settings }) {
@@ -275,7 +276,7 @@ function Body({ section, s }: { section: Section; s: Settings }) {
           <Row label="External editor" hint={'A command such as code, cursor, zed or open -a "Sublime Text". Empty opens the default app.'}>
             <TextField value={s.editor} placeholder="Default app" onCommit={(v) => set({ editor: v })} />
           </Row>
-          <Row label="Reset settings" hint="Restores every setting to its default. Saved loadouts and AI keys stay.">
+          <Row label="Reset settings" hint="Restores every setting to its default. Saved loadouts, project tiles and AI keys stay.">
             <button className="btn small" onClick={resetAll}>
               Reset all…
             </button>
