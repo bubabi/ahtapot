@@ -29,6 +29,8 @@ discards. It runs your installed `git`, so your config, hooks and credential hel
 
 ## Features
 
+https://github.com/user-attachments/assets/61bf7a1e-95c9-40ed-909d-211a5e0ce09b
+
 - **Commit graph.** Every branch, remote and tag, paged 1,500 commits at a time. Jumping to an
   older commit, from a parent link or a search result, loads history down to it.
 - **Staging.** Stage by file, hunk or line. Click a `+` or `-` line in the diff gutter to pick it,
